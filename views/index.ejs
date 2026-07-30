@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Registry</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+
+
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path
+              d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z">
+            </path>
+          </svg>
+        </div>
+        <div>
+          <h1>Doctor Registry</h1>
+          <span>Patient Records</span>
+        </div>
+      </div>
+      <div class="today">
+        <div class="label">Today</div>
+        <div class="date">
+          <%=day%>, <%=date%>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="card form-card">
+      <div class="section-title">
+        <span class="num">01</span>
+        <h2>Patient details</h2>
+      </div>
+
+      <form>
+        <div class="field full">
+          <label for="name">Full name<span class="req">*</span></label>
+          <input type="text" id="name" placeholder="Patient name">
+        </div>
+
+        <div class="field full">
+          <label for="address">Address<span class="req">*</span></label>
+          <input type="text" id="address" placeholder="Clinic / residence address, city, state">
+        </div>
+
+        <div class="field">
+          <label for="phone1">Phone 1<span class="req">*</span></label>
+          <input type="tel" id="phone1" placeholder="10-digit mobile number">
+        </div>
+
+        <div class="field">
+          <label for="dob">Date of birth<span class="req">*</span></label>
+          <input type="date" id="dob">
+        </div>
+
+        <div class="field">
+          <label for="appointment">Date of appointment<span class="req">*</span></label>
+          <input type="date" id="appointment">
+        </div>
+
+        <div class="field">
+          <label for="email">Gender</label>
+          <select id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="email">Treatment Type</label>
+          <select id="TreatmentType">
+            <option value="General Dental Check-up">General Dental Check-up</option>
+            <option value="Routine Check-up">Routine Check-up</option>
+            <option value="Root Canal Treatment (RCT)">Root Canal Treatment (RCT)</option>
+            <option value="Dental Implant">Dental Implant</option>
+            <option value="Other Dental Procedure">Other Dental Procedure</option>
+          </select>
+        </div>
+
+        <div class="form-actions">
+          <button type="reset" class="btn-ghost">Clear form</button>
+          <button type="submit" class="btn-primary" id="submitPatientData">Add Patient</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card table-card">
+      <div class="table-head">
+        <div class="section-title" style="margin-bottom:0;">
+          <span class="num">02</span>
+          <h2>Registered Patient </h2>
+        </div>
+        <div class="export-group">
+          <button class="btn-export" id="ExportToExcel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            Export Excel
+          </button>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table >
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Phone 1</th>
+              <th>Date of birth</th>
+              <th>Date of appointment</th>
+              <th>Gender</th>
+              <th>Treatment Type</th>
+            </tr>
+          </thead>
+          <tbody id="PatientRecordTable">
+            <% result.forEach((d)=> { %>
+              <tr>
+                <td class="name-cell">
+                  <%= d.name %>
+                </td>
+                <td>
+                  <%= d.address %>
+                </td>
+                <td>
+                  <%= d.phone1 %>
+                </td>
+                <td>
+                  <%= d.dob %>
+                </td>
+                <td>
+                  <%= d.appointmentDate %>
+                </td>
+                <td>
+                  <%= d.gender %>
+                </td>
+                <td>
+                  <%= d.treatment_type %>
+                </td>
+              </tr>
+              <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+  <footer>Desing and Develop By Vaibhav Joyashi</footer>
+  <script src="/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script>
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("dob").max = today;
+    document.getElementById("appointment").min = today; 
+  </script>
+</body>
+
+</html>
