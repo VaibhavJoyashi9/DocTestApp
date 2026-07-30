@@ -18,7 +18,7 @@ let connection = mysql.createPool({
     connectionLimit: 10,
     queueLimit: 0
 });
-connection.connect((err) => {
+connection.getConnection((err) => {
     if (err) {
         console.log("Database connection failed:", err.message);
         return;

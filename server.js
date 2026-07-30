@@ -27,7 +27,7 @@ let connection = mysql.createPool({
     queueLimit: 0
 });
 
-connection.connect((err) => {
+connection.getConnection((err) => {
     if (err) {
         console.log("error");
     }
