@@ -8,12 +8,15 @@ const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
 const TEMPLATE_NAME = process.env.TEMPLATE_NAME;
 const TEMPLATE_LANG = process.env.TEMPLATE_LANG;
 
-let connection = mysql.createConnection({
+let connection = mysql.createPool({
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 connection.connect((err) => {
     if (err) {
@@ -129,8 +132,6 @@ function sendMsg() {
             console.log("No appointments found for tomorrow");
             return;
         }
-
-        console.log(`Found ${results.length} appointment(s)`);
 
         for (const patient of results) {
             try {
