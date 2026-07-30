@@ -166,6 +166,3 @@ cron.schedule(
     }
 );
 
-console.log("WhatsApp reminder service started");
-console.log("Reminder time: Every day at 9:00 AM");
-
