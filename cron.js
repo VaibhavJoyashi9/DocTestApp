@@ -158,7 +158,7 @@ function sendMsg() {
 }
 
 cron.schedule(
-    "10 12 * * *",
+    process.env.Cron_Time,
     () => {
         sendMsg();
     },
