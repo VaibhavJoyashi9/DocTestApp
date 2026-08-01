@@ -158,7 +158,7 @@ function sendMsg() {
 }
 
 cron.schedule(
-    "35 11 * * *",
+    "10 12 * * *",
     () => {
         sendMsg();
     },
